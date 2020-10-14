@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="wallet">
+            <h2><span>Wallet</span> {{ wallet.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Balance</span></dt>
+                <dd>
+                    <span>{{ wallet.balance }}</span>
+                </dd>
+                <dt><span>Owener Id</span></dt>
+                <dd>
+                    <span>{{ wallet.owenerId }}</span>
+                </dd>
+                <dt><span>Passbook</span></dt>
+                <dd>
+                    <div *ngIf="wallet.passbookId">
+                        <a [routerLink]="['/pass-book', wallet.passbookId, 'view']">{{ wallet.passbookId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/wallet', wallet.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

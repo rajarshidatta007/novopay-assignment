@@ -1,0 +1,50 @@
+{
+  "name": "Transaction",
+  "fields": [
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "charges",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "wallet",
+      "otherEntityRelationshipName": "transaction",
+      "relationshipName": "receiver",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "wallet",
+      "otherEntityRelationshipName": "transaction",
+      "relationshipName": "sender",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "passBook",
+      "otherEntityRelationshipName": "transaction",
+      "javadoc": "Another side of the same relationship",
+      "relationshipName": "passbook",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201014033641",
+  "entityTableName": "transaction",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

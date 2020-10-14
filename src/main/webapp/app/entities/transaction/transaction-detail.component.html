@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="transaction">
+            <h2><span>Transaction</span> {{ transaction.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Amount</span></dt>
+                <dd>
+                    <span>{{ transaction.amount }}</span>
+                </dd>
+                <dt><span>Charges</span></dt>
+                <dd>
+                    <span>{{ transaction.charges }}</span>
+                </dd>
+                <dt><span>Receiver</span></dt>
+                <dd>
+                    <div *ngIf="transaction.receiverId">
+                        <a [routerLink]="['/wallet', transaction.receiverId, 'view']">{{ transaction.receiverId }}</a>
+                    </div>
+                </dd>
+                <dt><span>Sender</span></dt>
+                <dd>
+                    <div *ngIf="transaction.senderId">
+                        <a [routerLink]="['/wallet', transaction.senderId, 'view']">{{ transaction.senderId }}</a>
+                    </div>
+                </dd>
+                <dt><span>Passbook</span></dt>
+                <dd>
+                    <div *ngIf="transaction.passbookId">
+                        <a [routerLink]="['/pass-book', transaction.passbookId, 'view']">{{ transaction.passbookId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/transaction', transaction.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

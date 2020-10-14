@@ -49,6 +49,10 @@ public class CacheConfiguration {
             createCache(cm, com.assignment.domain.User.class.getName() + ".authorities");
             createCache(cm, com.assignment.domain.PersistentToken.class.getName());
             createCache(cm, com.assignment.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, com.assignment.domain.Wallet.class.getName());
+            createCache(cm, com.assignment.domain.Transaction.class.getName());
+            createCache(cm, com.assignment.domain.PassBook.class.getName());
+            createCache(cm, com.assignment.domain.PassBook.class.getName() + ".transactions");
             // jhipster-needle-ehcache-add-entry
         };
     }

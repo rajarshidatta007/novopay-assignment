@@ -1,0 +1,25 @@
+{
+  "name": "PassBook",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "transaction",
+      "otherEntityRelationshipName": "passbook",
+      "javadoc": "A relationship",
+      "relationshipName": "transaction"
+    }
+  ],
+  "changelogDate": "20201014033741",
+  "javadoc": "not an ignored comment",
+  "entityTableName": "pass_book",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
