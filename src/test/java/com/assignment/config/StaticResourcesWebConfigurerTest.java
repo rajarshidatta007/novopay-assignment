@@ -1,12 +1,17 @@
 package com.assignment.config;
 
-import static com.assignment.config.StaticResourcesWebConfiguration.*;
+import static com.assignment.config.StaticResourcesWebConfiguration.RESOURCE_LOCATIONS;
+import static com.assignment.config.StaticResourcesWebConfiguration.RESOURCE_PATHS;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import io.github.jhipster.config.JHipsterDefaults;
-import io.github.jhipster.config.JHipsterProperties;
 import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.CacheControl;
@@ -14,6 +19,9 @@ import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+
+import io.github.jhipster.config.JHipsterDefaults;
+import io.github.jhipster.config.JHipsterProperties;
 
 public class StaticResourcesWebConfigurerTest {
     public static final int MAX_AGE_TEST = 5;

@@ -4,21 +4,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.assignment.NovopayassignmentApp;
-import com.assignment.domain.Authority;
-import com.assignment.domain.User;
-import com.assignment.repository.UserRepository;
-import com.assignment.security.AuthoritiesConstants;
-import com.assignment.service.dto.UserDTO;
-import com.assignment.service.mapper.UserMapper;
-import com.assignment.web.rest.vm.ManagedUserVM;
 import java.time.Instant;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
+
 import javax.persistence.EntityManager;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,6 +32,15 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.assignment.NovopayassignmentApp;
+import com.assignment.domain.Authority;
+import com.assignment.domain.User;
+import com.assignment.repository.UserRepository;
+import com.assignment.security.AuthoritiesConstants;
+import com.assignment.service.dto.UserDTO;
+import com.assignment.service.mapper.UserMapper;
+import com.assignment.web.rest.vm.ManagedUserVM;
 
 /**
  * Integration tests for the {@link UserResource} REST controller.

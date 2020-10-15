@@ -1,20 +1,15 @@
 package com.assignment.service;
 
-import com.assignment.config.Constants;
-import com.assignment.domain.Authority;
-import com.assignment.domain.User;
-import com.assignment.repository.AuthorityRepository;
-import com.assignment.repository.PersistentTokenRepository;
-import com.assignment.repository.UserRepository;
-import com.assignment.security.AuthoritiesConstants;
-import com.assignment.security.SecurityUtils;
-import com.assignment.service.dto.UserDTO;
-import io.github.jhipster.security.RandomUtil;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -24,6 +19,18 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.assignment.config.Constants;
+import com.assignment.domain.Authority;
+import com.assignment.domain.User;
+import com.assignment.repository.AuthorityRepository;
+import com.assignment.repository.PersistentTokenRepository;
+import com.assignment.repository.UserRepository;
+import com.assignment.security.AuthoritiesConstants;
+import com.assignment.security.SecurityUtils;
+import com.assignment.service.dto.UserDTO;
+
+import io.github.jhipster.security.RandomUtil;
 
 /**
  * Service class for managing users.

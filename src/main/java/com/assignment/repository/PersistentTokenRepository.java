@@ -1,10 +1,12 @@
 package com.assignment.repository;
 
-import com.assignment.domain.PersistentToken;
-import com.assignment.domain.User;
 import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.assignment.domain.PersistentToken;
+import com.assignment.domain.User;
 
 /**
  * Spring Data JPA repository for the {@link PersistentToken} entity.

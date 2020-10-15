@@ -1,7 +1,8 @@
 package com.assignment.repository;
 
-import com.assignment.domain.Authority;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.assignment.domain.Authority;
 
 /**
  * Spring Data JPA repository for the {@link Authority} entity.

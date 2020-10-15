@@ -3,10 +3,8 @@ package com.assignment.security;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import com.assignment.NovopayassignmentApp;
-import com.assignment.domain.User;
-import com.assignment.repository.UserRepository;
 import java.util.Locale;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.assignment.NovopayassignmentApp;
+import com.assignment.domain.User;
+import com.assignment.repository.UserRepository;
 
 /**
  * Integrations tests for {@link DomainUserDetailsService}.

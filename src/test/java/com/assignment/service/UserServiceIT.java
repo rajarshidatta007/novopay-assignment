@@ -3,20 +3,13 @@ package com.assignment.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import com.assignment.NovopayassignmentApp;
-import com.assignment.config.Constants;
-import com.assignment.domain.PersistentToken;
-import com.assignment.domain.User;
-import com.assignment.repository.PersistentTokenRepository;
-import com.assignment.repository.UserRepository;
-import com.assignment.service.dto.UserDTO;
-import io.github.jhipster.security.RandomUtil;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,6 +21,16 @@ import org.springframework.data.auditing.DateTimeProvider;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.assignment.NovopayassignmentApp;
+import com.assignment.config.Constants;
+import com.assignment.domain.PersistentToken;
+import com.assignment.domain.User;
+import com.assignment.repository.PersistentTokenRepository;
+import com.assignment.repository.UserRepository;
+import com.assignment.service.dto.UserDTO;
+
+import io.github.jhipster.security.RandomUtil;
 
 /**
  * Integration tests for {@link UserService}.

@@ -1,10 +1,11 @@
 package com.assignment.service.mapper;
 
 
-import com.assignment.domain.*;
-import com.assignment.service.dto.TransactionDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-import org.mapstruct.*;
+import com.assignment.domain.Transaction;
+import com.assignment.service.dto.TransactionDTO;
 
 /**
  * Mapper for the entity {@link Transaction} and its DTO {@link TransactionDTO}.

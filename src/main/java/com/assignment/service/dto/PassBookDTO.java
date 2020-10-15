@@ -1,8 +1,12 @@
 package com.assignment.service.dto;
 
+import java.io.Serializable;
+import java.util.Set;
+
+import com.assignment.domain.Transaction;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
 
 /**
  * A DTO for the {@link com.assignment.domain.PassBook} entity.
@@ -10,8 +14,14 @@ import java.io.Serializable;
 @ApiModel(description = "not an ignored comment")
 public class PassBookDTO implements Serializable {
     
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
+	private Long id;
+
+    private Set<Transaction> transactions;
     /**
      * A relationship
      */
@@ -25,7 +35,15 @@ public class PassBookDTO implements Serializable {
         this.id = id;
     }
 
-    @Override
+    public Set<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(Set<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

@@ -2,17 +2,20 @@ package com.assignment.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.assignment.NovopayassignmentApp;
-import com.assignment.domain.PersistentAuditEvent;
-import com.assignment.repository.PersistenceAuditEventRepository;
-import io.github.jhipster.config.JHipsterProperties;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.assignment.NovopayassignmentApp;
+import com.assignment.domain.PersistentAuditEvent;
+import com.assignment.repository.PersistenceAuditEventRepository;
+
+import io.github.jhipster.config.JHipsterProperties;
 
 /**
  * Integration tests for {@link AuditEventService}.

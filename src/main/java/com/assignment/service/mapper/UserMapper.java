@@ -1,11 +1,16 @@
 package com.assignment.service.mapper;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.assignment.domain.Authority;
 import com.assignment.domain.User;
 import com.assignment.service.dto.UserDTO;
-import java.util.*;
-import java.util.stream.Collectors;
-import org.springframework.stereotype.Service;
 
 /**
  * Mapper for the entity {@link User} and its DTO called {@link UserDTO}.

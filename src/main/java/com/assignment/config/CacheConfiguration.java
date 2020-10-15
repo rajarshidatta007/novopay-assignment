@@ -1,9 +1,10 @@
 package com.assignment.config;
 
-import io.github.jhipster.config.JHipsterProperties;
-import io.github.jhipster.config.cache.PrefixedKeyGenerator;
 import java.time.Duration;
-import org.ehcache.config.builders.*;
+
+import org.ehcache.config.builders.CacheConfigurationBuilder;
+import org.ehcache.config.builders.ExpiryPolicyBuilder;
+import org.ehcache.config.builders.ResourcePoolsBuilder;
 import org.ehcache.jsr107.Eh107Configuration;
 import org.hibernate.cache.jcache.ConfigSettings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,11 @@ import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.info.GitProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import io.github.jhipster.config.JHipsterProperties;
+import io.github.jhipster.config.cache.PrefixedKeyGenerator;
 
 @Configuration
 @EnableCaching

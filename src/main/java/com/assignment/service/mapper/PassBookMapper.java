@@ -1,15 +1,16 @@
 package com.assignment.service.mapper;
 
 
-import com.assignment.domain.*;
-import com.assignment.service.dto.PassBookDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-import org.mapstruct.*;
+import com.assignment.domain.PassBook;
+import com.assignment.service.dto.PassBookDTO;
 
 /**
  * Mapper for the entity {@link PassBook} and its DTO {@link PassBookDTO}.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring")
 public interface PassBookMapper extends EntityMapper<PassBookDTO, PassBook> {
 
 

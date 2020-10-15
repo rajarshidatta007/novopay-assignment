@@ -1,10 +1,11 @@
 package com.assignment.service.mapper;
 
 
-import com.assignment.domain.*;
-import com.assignment.service.dto.WalletDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-import org.mapstruct.*;
+import com.assignment.domain.Wallet;
+import com.assignment.service.dto.WalletDTO;
 
 /**
  * Mapper for the entity {@link Wallet} and its DTO {@link WalletDTO}.

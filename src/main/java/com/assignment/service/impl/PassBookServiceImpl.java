@@ -1,19 +1,20 @@
 package com.assignment.service.impl;
 
-import com.assignment.service.PassBookService;
-import com.assignment.domain.PassBook;
-import com.assignment.repository.PassBookRepository;
-import com.assignment.service.dto.PassBookDTO;
-import com.assignment.service.mapper.PassBookMapper;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import com.assignment.domain.PassBook;
+import com.assignment.repository.PassBookRepository;
+import com.assignment.service.PassBookService;
+import com.assignment.service.dto.PassBookDTO;
+import com.assignment.service.mapper.PassBookMapper;
 
 /**
  * Service Implementation for managing {@link PassBook}.
@@ -26,11 +27,11 @@ public class PassBookServiceImpl implements PassBookService {
 
     private final PassBookRepository passBookRepository;
 
-    private final PassBookMapper passBookMapper;
+    @Autowired
+    private PassBookMapper passBookMapper;
 
-    public PassBookServiceImpl(PassBookRepository passBookRepository, PassBookMapper passBookMapper) {
+    public PassBookServiceImpl(PassBookRepository passBookRepository) {
         this.passBookRepository = passBookRepository;
-        this.passBookMapper = passBookMapper;
     }
 
     @Override

@@ -1,11 +1,13 @@
 package com.assignment.service;
 
-import com.assignment.service.dto.WalletDTO;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
+import com.assignment.service.dto.AddMoneyDto;
+import com.assignment.service.dto.PassBookDTO;
+import com.assignment.service.dto.WalletDTO;
 
 /**
  * Service Interface for managing {@link com.assignment.domain.Wallet}.
@@ -18,7 +20,7 @@ public interface WalletService {
      * @param walletDTO the entity to save.
      * @return the persisted entity.
      */
-    WalletDTO save(WalletDTO walletDTO);
+    WalletDTO create(WalletDTO walletDTO);
 
     /**
      * Get all the wallets.
@@ -43,4 +45,10 @@ public interface WalletService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+	WalletDTO addMoney(AddMoneyDto addMoneyDto);
+
+	WalletDTO save(WalletDTO walletDTO);
+
+	Optional<PassBookDTO> findPassBookForWalletId(Long walletId);
 }

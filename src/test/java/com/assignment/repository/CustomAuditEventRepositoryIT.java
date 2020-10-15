@@ -3,16 +3,14 @@ package com.assignment.repository;
 import static com.assignment.repository.CustomAuditEventRepository.EVENT_DATA_COLUMN_MAX_LENGTH;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.assignment.NovopayassignmentApp;
-import com.assignment.config.Constants;
-import com.assignment.config.audit.AuditEventConverter;
-import com.assignment.domain.PersistentAuditEvent;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,11 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.assignment.NovopayassignmentApp;
+import com.assignment.config.Constants;
+import com.assignment.config.audit.AuditEventConverter;
+import com.assignment.domain.PersistentAuditEvent;
 
 /**
  * Integration tests for {@link CustomAuditEventRepository}.

@@ -8,7 +8,12 @@ import java.math.BigDecimal;
  */
 public class WalletDTO implements Serializable {
     
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private BigDecimal balance;
 

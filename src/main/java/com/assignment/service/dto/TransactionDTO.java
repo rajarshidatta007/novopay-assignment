@@ -1,22 +1,27 @@
 package com.assignment.service.dto;
 
-import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * A DTO for the {@link com.assignment.domain.Transaction} entity.
  */
 public class TransactionDTO implements Serializable {
     
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private BigDecimal amount;
 
     private BigDecimal charges;
 
-
-    private Long receiverId;
+	private Long receiverId;
 
     private Long senderId;
     /**
@@ -25,6 +30,8 @@ public class TransactionDTO implements Serializable {
     @ApiModelProperty(value = "Another side of the same relationship")
 
     private Long passbookId;
+    
+    private Party deductionParty;
     
     public Long getId() {
         return id;
@@ -74,7 +81,15 @@ public class TransactionDTO implements Serializable {
         this.passbookId = passBookId;
     }
 
-    @Override
+    public Party getDeductionParty() {
+		return deductionParty;
+	}
+
+	public void setDeductionParty(Party deductionParty) {
+		this.deductionParty = deductionParty;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

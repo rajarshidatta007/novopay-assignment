@@ -1,24 +1,32 @@
 package com.assignment.security;
 
-import com.assignment.domain.PersistentToken;
-import com.assignment.repository.PersistentTokenRepository;
-import com.assignment.repository.UserRepository;
-import io.github.jhipster.config.JHipsterProperties;
-import io.github.jhipster.security.PersistentTokenCache;
-import io.github.jhipster.security.RandomUtil;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.authentication.rememberme.*;
+import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.CookieTheftException;
+import org.springframework.security.web.authentication.rememberme.InvalidCookieException;
+import org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationException;
 import org.springframework.stereotype.Service;
+
+import com.assignment.domain.PersistentToken;
+import com.assignment.repository.PersistentTokenRepository;
+import com.assignment.repository.UserRepository;
+
+import io.github.jhipster.config.JHipsterProperties;
+import io.github.jhipster.security.PersistentTokenCache;
+import io.github.jhipster.security.RandomUtil;
 
 /**
  * Custom implementation of Spring Security's RememberMeServices.
