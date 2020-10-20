@@ -86,7 +86,7 @@ public class WalletResource {
         if (walletDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        WalletDTO result = walletService.create(walletDTO);
+        WalletDTO result = walletService.save(walletDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, walletDTO.getId().toString()))
             .body(result);

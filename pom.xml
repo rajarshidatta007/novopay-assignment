@@ -298,6 +298,11 @@
 			<artifactId>metrics-core</artifactId>
 		</dependency>
 		<!-- jhipster-needle-maven-add-dependency -->
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-52</artifactId>
+			<version>2.10.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

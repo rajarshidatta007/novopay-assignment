@@ -31,7 +31,7 @@ public class TransactionDTO implements Serializable {
 
     private Long passbookId;
     
-    private Party deductionParty;
+    private TransactionType transactionType;
     
     public Long getId() {
         return id;
@@ -80,13 +80,14 @@ public class TransactionDTO implements Serializable {
     public void setPassbookId(Long passBookId) {
         this.passbookId = passBookId;
     }
+    
 
-    public Party getDeductionParty() {
-		return deductionParty;
+	public TransactionType getTransactionType() {
+		return transactionType;
 	}
 
-	public void setDeductionParty(Party deductionParty) {
-		this.deductionParty = deductionParty;
+	public void setTransactionType(TransactionType transactionType) {
+		this.transactionType = transactionType;
 	}
 
 	@Override

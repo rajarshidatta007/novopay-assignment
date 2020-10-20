@@ -14,7 +14,7 @@ import com.assignment.domain.Transaction;
 import com.assignment.domain.Wallet;
 import com.assignment.repository.TransactionRepository;
 import com.assignment.service.TransactionService;
-import com.assignment.service.dto.Party;
+import com.assignment.service.dto.TransactionType;
 import com.assignment.service.dto.TransactionDTO;
 import com.assignment.service.dto.WalletDTO;
 import com.assignment.service.mapper.TransactionMapper;
@@ -50,10 +50,11 @@ public class TransactionServiceImpl implements TransactionService {
 		log.debug("Request to save Transaction : {}", transactionDTO);
 
 		Transaction transaction = transactionMapper.toEntity(transactionDTO);
+		transaction.setTransactionType(transactionDTO.getTransactionType());
 		transaction.setCharges(fetchCharges(transaction.getAmount()));
 		transaction = transactionRepository.save(transaction);
 
-		switch (transactionDTO.getDeductionParty()) {
+		switch (transaction.getTransactionType()) {
 		case CREDIT: {
 			updateCreditScenario(transaction);
 			break;

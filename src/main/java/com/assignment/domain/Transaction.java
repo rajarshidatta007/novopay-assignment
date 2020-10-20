@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.assignment.service.dto.TransactionType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -42,11 +45,11 @@ public class Transaction implements Serializable {
     private BigDecimal charges;
 
     @OneToOne(fetch=FetchType.EAGER)
-    @JoinColumn(unique = true)
+    @JoinColumn(unique = false)
     private Wallet receiver;
 
     @OneToOne(fetch=FetchType.EAGER)
-    @JoinColumn(unique = true)
+    @JoinColumn(unique = false)
     private Wallet sender;
 
     /**
@@ -55,6 +58,10 @@ public class Transaction implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = "transactions", allowSetters = true)
     private PassBook passbook;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name="transaction_type")
+    private TransactionType transactionType;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -131,7 +138,15 @@ public class Transaction implements Serializable {
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
-    @Override
+    public TransactionType getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(TransactionType transactionType) {
+		this.transactionType = transactionType;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

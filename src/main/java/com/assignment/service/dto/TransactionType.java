@@ -1,5 +1,5 @@
 package com.assignment.service.dto;
 
-public enum Party {
+public enum TransactionType {
 	DEBIT,CREDIT
 }

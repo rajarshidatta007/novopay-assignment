@@ -9,9 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.assignment.domain.PassBook;
 import com.assignment.domain.Wallet;
 import com.assignment.repository.WalletRepository;
-import com.assignment.service.PassBookService;
 import com.assignment.service.WalletService;
 import com.assignment.service.dto.AddMoneyDto;
 import com.assignment.service.dto.PassBookDTO;
@@ -32,15 +32,12 @@ public class WalletServiceImpl implements WalletService {
 
 	private final WalletMapper walletMapper;
 
-	private final PassBookService passBookService;
 
 	private final PassBookMapper passBookMapper;
 
-	public WalletServiceImpl(WalletRepository walletRepository, WalletMapper walletMapper,
-			PassBookService passBookService, PassBookMapper passBookMapper) {
+	public WalletServiceImpl(WalletRepository walletRepository, WalletMapper walletMapper,PassBookMapper passBookMapper) {
 		this.walletRepository = walletRepository;
 		this.walletMapper = walletMapper;
-		this.passBookService = passBookService;
 		this.passBookMapper = passBookMapper;
 	}
 
@@ -49,10 +46,9 @@ public class WalletServiceImpl implements WalletService {
 		log.debug("Request to create Wallet : {}", walletDTO);
 		Wallet wallet = walletMapper.toEntity(walletDTO);
 
-		PassBookDTO passBook = new PassBookDTO();
-		passBook = passBookService.save(passBook);
+		PassBook passBook = new PassBook();
 
-		wallet.setPassbook(passBookMapper.toEntity(passBook));
+		wallet.setPassbook(passBook);
 		wallet = walletRepository.save(wallet);
 		return walletMapper.toDto(wallet);
 	}
