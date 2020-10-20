@@ -145,7 +145,7 @@ public class WalletResource {
     }
     
     
-    @GetMapping("/wallets/passbook/{id}")
+    @GetMapping("/wallets/passbook/{walletId}")
     public ResponseEntity<PassBookDTO> getWalletPassbook(@PathVariable Long walletId) {
         log.debug("REST request to get Passbook for Wallet : {}", walletId);
         Optional<PassBookDTO> passBookDto = walletService.findPassBookForWalletId(walletId);

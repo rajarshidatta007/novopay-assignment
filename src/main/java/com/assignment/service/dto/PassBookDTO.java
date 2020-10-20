@@ -21,7 +21,7 @@ public class PassBookDTO implements Serializable {
 
 	private Long id;
 
-    private Set<Transaction> transactions;
+    private Set<TransactionDTO> transactions;
     /**
      * A relationship
      */
@@ -35,11 +35,11 @@ public class PassBookDTO implements Serializable {
         this.id = id;
     }
 
-    public Set<Transaction> getTransactions() {
+    public Set<TransactionDTO> getTransactions() {
 		return transactions;
 	}
 
-	public void setTransactions(Set<Transaction> transactions) {
+	public void setTransactions(Set<TransactionDTO> transactions) {
 		this.transactions = transactions;
 	}
 

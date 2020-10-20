@@ -171,4 +171,17 @@ public class Transaction implements Serializable {
             ", charges=" + getCharges() +
             "}";
     }
+
+	public Transaction getCopy() {
+		Transaction newTransaction = new Transaction();
+		newTransaction.amount = this.amount;
+		newTransaction.charges = this.charges;
+		newTransaction.receiver = this.receiver;
+		newTransaction.sender = this.sender;
+		newTransaction.passbook = this.passbook;
+		newTransaction.transactionType = this.transactionType;
+		return newTransaction;
+	}
+    
+    
 }

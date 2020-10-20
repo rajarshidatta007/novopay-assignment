@@ -2,7 +2,6 @@ package com.assignment.service.mapper;
 
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import com.assignment.domain.PassBook;
 import com.assignment.service.dto.PassBookDTO;
@@ -14,8 +13,11 @@ import com.assignment.service.dto.PassBookDTO;
 public interface PassBookMapper extends EntityMapper<PassBookDTO, PassBook> {
 
 
-    @Mapping(target = "transactions", ignore = true)
-    @Mapping(target = "removeTransaction", ignore = true)
+	/*
+	 * @Mapping(target = "transactions", ignore = true)
+	 * 
+	 * @Mapping(target = "removeTransaction", ignore = true)
+	 */
     PassBook toEntity(PassBookDTO passBookDTO);
 
     default PassBook fromId(Long id) {

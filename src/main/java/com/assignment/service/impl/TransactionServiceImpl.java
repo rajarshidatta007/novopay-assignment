@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.assignment.domain.Transaction;
 import com.assignment.domain.Wallet;
 import com.assignment.repository.TransactionRepository;
+import com.assignment.repository.WalletRepository;
 import com.assignment.service.TransactionService;
-import com.assignment.service.dto.TransactionType;
 import com.assignment.service.dto.TransactionDTO;
-import com.assignment.service.dto.WalletDTO;
+import com.assignment.service.dto.TransactionType;
 import com.assignment.service.mapper.TransactionMapper;
 import com.assignment.service.mapper.WalletMapper;
 
@@ -36,13 +36,16 @@ public class TransactionServiceImpl implements TransactionService {
 	private final WalletServiceImpl walletServiceImpl;
 
 	private final WalletMapper walletMapper;
+	
+	private final WalletRepository walletRepository;
 
 	public TransactionServiceImpl(TransactionRepository transactionRepository, TransactionMapper transactionMapper,
-			WalletServiceImpl walletServiceImpl, WalletMapper walletMapper) {
+			WalletServiceImpl walletServiceImpl, WalletMapper walletMapper,WalletRepository walletRepository) {
 		this.transactionRepository = transactionRepository;
 		this.transactionMapper = transactionMapper;
 		this.walletServiceImpl = walletServiceImpl;
 		this.walletMapper = walletMapper;
+		this.walletRepository = walletRepository;
 	}
 
 	@Override
@@ -52,7 +55,7 @@ public class TransactionServiceImpl implements TransactionService {
 		Transaction transaction = transactionMapper.toEntity(transactionDTO);
 		transaction.setTransactionType(transactionDTO.getTransactionType());
 		transaction.setCharges(fetchCharges(transaction.getAmount()));
-		transaction = transactionRepository.save(transaction);
+		transaction = transactionRepository.saveAndFlush(transaction);
 
 		switch (transaction.getTransactionType()) {
 		case CREDIT: {
@@ -79,14 +82,14 @@ public class TransactionServiceImpl implements TransactionService {
 				: transaction.getAmount());
 
 		receiver.getPassbook().addTransaction(transaction);
-		walletServiceImpl.save(walletMapper.toDto(receiver));
+		walletRepository.saveAndFlush(receiver);
 
 		sender.setBalance(sender.getBalance() != null
 				? sender.getBalance().subtract(transaction.getAmount().add(transaction.getCharges()))
 				: new BigDecimal(0).subtract(transaction.getAmount().add(transaction.getCharges())));
 
 		sender.getPassbook().addTransaction(transaction);
-		walletServiceImpl.save(walletMapper.toDto(sender));
+		walletRepository.saveAndFlush(sender);
 	}
 
 	private void updateCreditScenario(Transaction transaction) {
@@ -98,13 +101,13 @@ public class TransactionServiceImpl implements TransactionService {
 				: transaction.getAmount().subtract(transaction.getCharges()));
 
 		receiver.getPassbook().addTransaction(transaction);
-		walletServiceImpl.save(walletMapper.toDto(receiver));
+		walletRepository.saveAndFlush(receiver);
 
 		sender.setBalance(sender.getBalance() != null ? sender.getBalance().subtract(transaction.getAmount())
 				: new BigDecimal(0).subtract(transaction.getAmount()));
 
 		sender.getPassbook().addTransaction(transaction);
-		walletServiceImpl.save(walletMapper.toDto(sender));
+		walletRepository.saveAndFlush(sender);
 	}
 
 	private BigDecimal fetchCharges(BigDecimal amount) {
@@ -129,5 +132,65 @@ public class TransactionServiceImpl implements TransactionService {
 	public void delete(Long id) {
 		log.debug("Request to delete Transaction : {}", id);
 		transactionRepository.deleteById(id);
+	}
+
+	@Override
+	public void reverseTransaction(Long id) {
+		Transaction existingTransaction = transactionRepository.getOne(id);
+		Transaction newTransaction = existingTransaction.getCopy();
+		newTransaction.setTransactionType(TransactionType.REVERSED);
+
+		newTransaction = transactionRepository.saveAndFlush(newTransaction);
+		
+		switch (newTransaction.getTransactionType()) {
+		case CREDIT: {
+			reverseCreditScenario(newTransaction);
+			break;
+		}
+		case DEBIT: {
+			reverseDebitScenario(newTransaction);
+			break;
+		}
+		default: {
+			break;
+		}
+		}
+		
+	}
+
+	private void reverseDebitScenario(Transaction transaction) {
+		Wallet receiver = walletMapper.toEntity(walletServiceImpl.findOne(transaction.getReceiver().getId()).get());
+		Wallet sender = walletMapper.toEntity(walletServiceImpl.findOne(transaction.getSender().getId()).get());
+
+		receiver.setBalance(receiver.getBalance() != null ? receiver.getBalance().subtract(transaction.getAmount())
+				: new BigDecimal(0).subtract(transaction.getAmount()));
+
+		receiver.getPassbook().addTransaction(transaction);
+		walletRepository.saveAndFlush(receiver);
+
+		sender.setBalance(sender.getBalance() != null
+				? sender.getBalance().add(transaction.getAmount().add(transaction.getCharges()))
+				: transaction.getAmount().add(transaction.getCharges()));
+
+		sender.getPassbook().addTransaction(transaction);
+		walletRepository.saveAndFlush(sender);
+	}
+
+	private void reverseCreditScenario(Transaction transaction) {
+		Wallet receiver = walletMapper.toEntity(walletServiceImpl.findOne(transaction.getReceiver().getId()).get());
+		Wallet sender = walletMapper.toEntity(walletServiceImpl.findOne(transaction.getSender().getId()).get());
+
+		receiver.setBalance(receiver.getBalance() != null
+				? receiver.getBalance().subtract(transaction.getAmount().subtract(transaction.getCharges()))
+				: transaction.getAmount().subtract(transaction.getCharges()));
+
+		receiver.getPassbook().addTransaction(transaction);
+		walletRepository.saveAndFlush(receiver);
+
+		sender.setBalance(sender.getBalance() != null ? sender.getBalance().add(transaction.getAmount())
+				: transaction.getAmount());
+
+		sender.getPassbook().addTransaction(transaction);
+		walletRepository.saveAndFlush(sender);
 	}
 }

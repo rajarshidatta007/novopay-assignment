@@ -129,4 +129,11 @@ public class TransactionResource {
         transactionService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
+    
+    @GetMapping("/transactions/reverse/{id}")
+    public ResponseEntity<Void> reverseTransaction(@PathVariable Long id){
+    	log.debug("REST request to reverse Transaction : {}", id);
+        transactionService.reverseTransaction(id);
+        return ResponseEntity.noContent().build();
+    }
 }

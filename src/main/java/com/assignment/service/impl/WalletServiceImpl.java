@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.assignment.domain.PassBook;
 import com.assignment.domain.Wallet;
 import com.assignment.repository.WalletRepository;
+import com.assignment.service.PassBookService;
 import com.assignment.service.WalletService;
 import com.assignment.service.dto.AddMoneyDto;
 import com.assignment.service.dto.PassBookDTO;
@@ -32,13 +33,16 @@ public class WalletServiceImpl implements WalletService {
 
 	private final WalletMapper walletMapper;
 
-
 	private final PassBookMapper passBookMapper;
 
-	public WalletServiceImpl(WalletRepository walletRepository, WalletMapper walletMapper,PassBookMapper passBookMapper) {
+	private final PassBookService passBookService;
+
+	public WalletServiceImpl(WalletRepository walletRepository, WalletMapper walletMapper,
+			PassBookMapper passBookMapper, PassBookService passBookService) {
 		this.walletRepository = walletRepository;
 		this.walletMapper = walletMapper;
 		this.passBookMapper = passBookMapper;
+		this.passBookService = passBookService;
 	}
 
 	@Override
@@ -94,9 +98,8 @@ public class WalletServiceImpl implements WalletService {
 	@Override
 	public Optional<PassBookDTO> findPassBookForWalletId(Long walletId) {
 		Optional<Wallet> wallet = walletRepository.findById(walletId);
-		return wallet.isPresent()
-				? (wallet.get().getPassbook() != null ? Optional.of(passBookMapper.toDto(wallet.get().getPassbook()))
-						: Optional.empty())
-				: Optional.empty();
+		return wallet.isPresent() ? (wallet.get().getPassbook() != null && wallet.get().getPassbook().getId() != null
+				? passBookService.findOne(wallet.get().getPassbook().getId())
+				: Optional.empty()) : Optional.empty();
 	}
 }
